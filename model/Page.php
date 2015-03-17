@@ -17,7 +17,7 @@ class Page
 
 	}
 
-	public function getPagesList($login){
+	public function getPagesList(){
 		$req=$this->bdd->prepare("SELECT * FROM pages");
 		$req->execute(array(
 		));
