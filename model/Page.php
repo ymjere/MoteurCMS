@@ -19,48 +19,32 @@ class Page
 
 	public function getPagesList(){
 		$req=$this->bdd->prepare("SELECT * FROM pages");
-		$req->execute(array(
-		));
+		$req->execute();
 		$rps=$req->fetchall();
 		return $rps;
-	}
-	
-	public function getPage($id){
-		$req=$this->bdd->prepare("SELECT * FROM pages WHERE id=:id");
-		$req->execute(array(
-			"id" =>  $id,
-		));
-		$rp=$req->fetch();
-		return $rp;
-	}
-	public function setCreated($id){
-		$req=$this->bdd->prepare("UPDATE pages SET created = 1 WHERE id=:id");
-		$req->execute(array(
-			"id" =>  $id,
-		));
 	}
 	
 	public function ModifPage($id,$pwd){
 		$req=$this->bdd->prepare("UPDATE users SET password = :pwd WHERE id=:id");
 		$req->execute(array(
-			"id" =>  $id,
-			"pwd" => $pwd
+			'id' =>  $id,
+			'pwd' => $pwd
 		));
 	}
 	
 	public function SupprUser($id){
 		$req=$this->bdd->prepare("DELETE FROM users WHERE id=:id");
 		$req->execute(array(
-			"id" =>  $id
+			'id' =>  $id
 		));
 	}
 	
 	public function CreatePage($title,$imgLink,$content){
-		$req=$this->bdd->prepare("INSERT INTO pages (`id`, `title`, `imgLink`,'content') VALUES (NULL,:title,:imgLink,:content)");
+		$req=$this->bdd->prepare("INSERT INTO pages (`id`, `title`, `imgLink`,`content`) VALUES (NULL,:title,:imgLink,:content)");
 		$req->execute(array(
-			"title" => $title,
-			"imgLink" => $imgLink,
-			"content" => $content
+			'title' => $title,
+			'imgLink' => $imgLink['name'],
+			'content' => $content,
 		));
 	}
 }
