@@ -1,0 +1,13 @@
+diff a/PagesManageUtils.php b/PagesManageUtils.php	(rejected hunks)
+@@ -4,8 +4,9 @@
+ 	include('init.php');
+ 
+ 	if(isset($_POST['mode'])){
+-		if($_POST['mode'] == 'createPage' && isset($_POST['title']) && isset($_POST['imgLink']) && isset($_POST['content']) ){
+-			$page->CreatePage($_POST['title'],"",$_POST['content']);
++		if($_POST['mode'] == 'createPage' && isset($_POST['title']) && isset($_FILES['imgLink']) && isset($_POST['content']) ){
++			RecupFile($_FILES['imgLink']);
++			$page->CreatePage($_POST['title'],$_FILES['imgLink'],$_POST['content']);
+ 		}
+ 		elseif($_POST['mode'] == 'edit' && isset($_POST['newPassword']) && isset($_POST['id']) ){
+ 			$user->ModifUser($_POST['id'],$_POST['newPassword']);
