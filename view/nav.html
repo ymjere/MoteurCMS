@@ -1,0 +1,27 @@
+<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li class="text-center">
+						<img src="assets/img/find_user.png" class="user-image img-responsive">
+					</li>
+					<li>					
+						<form id="hfManage" action="admin.php" method="GET">		
+							<input type="hidden" name="page" value="hfManage"/>
+						</form>
+						<a href="#" onclick="document.getElementById('hfManage').submit(); return false;"><i class="fa fa-cogs"></i>Header/Footer management</a>
+					</li>
+					<li>					
+						<form id="usersManage" action="admin.php" method="GET">		
+							<input type="hidden" name="page" value="usersManage"/>
+						</form>
+						<a href="#" onclick="document.getElementById('usersManage').submit(); return false;"><i class="fa fa-users"></i></i>Users management</a>
+					</li>
+					<li>					
+						<form id="pagesManage" action="admin.php" method="GET">		
+							<input type="hidden" name="page" value="pagesManage"/>
+						</form>
+						<a href="#" onclick="document.getElementById('pagesManage').submit(); return false;"><i class="fa fa-files-o"></i></i>Pages management</a>
+					</li>
+				</ul>               
+			</div>            
+		</nav> 

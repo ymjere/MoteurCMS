@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Header/Footer management</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/custom.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+
+<body>
+	<div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="admin.php">Binary admin</a> 
+            </div>
+			<div style="color: white;
+			padding: 15px 50px 5px 50px;
+			float: right;
+			font-size: 16px;">
+				<a href="logout.php" class="btn btn-danger square-btn-adjust">Logout</a>
+			</div>
+        </nav>
+		
+		{{navigation}}
+		
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                     <h2>Header/Footer management</h2>                        
+                    </div>
+                </div>
+                <hr>
+				<div class="col-md-12">
+					<ul class="nav nav-tabs" data-tabs="tabs">
+						<li class="active"><a href="#header" data-toggle="tab">Header <i class="fa"></i></a></li>
+						<li><a href="#footer" data-toggle="tab">Footer <i class="fa"></i></a></li>
+					</ul>	
+
+						<form id="hfForm" method="post" action="IOFiles.php" class="form-horizontal">
+							<div class="tab-content">
+								<div class="tab-pane active" id="header">
+									<div class="form-group">
+									<br>
+										<div class="col-md-12">
+											<textarea name="header" rows="7" cols="200">{{header}}</textarea>
+										</div>										
+									</div>
+								</div>
+
+								<div class="tab-pane" id="footer">
+									<div class="form-group">
+									<br>
+										<div class="col-md-12">
+											<textarea name="footer" rows="7" cols="200">{{footer}}</textarea>
+										</div>										
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group" style="margin-top: 15px;">
+								<div class="col-xs-1">
+									<button type="submit" class="btn btn-default">Validate</button>
+								</div>
+							</div>
+						</form>					
+                </div>
+            </div>
+        </div>
+	</div>
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$('#tabs').tab();
+		});
+	</script>    
+
+</body>
+</html>
