@@ -9,6 +9,13 @@
 		{{content}}
 	</td>
 	<td>
-		<img src="{{imgLink}} alt=""/>
+		<img src="{{imgLink}}" alt=""/>
+	</td>
+	<td>
+		<form id="createdPage" action="PagesManageUtils.php" method="POST">		
+			<input type="hidden" name="mode" value="generatePage"/>
+			<input type="hidden" name="page" value="{{id}}"/>
+		</form>
+		<a href="#" onclick="document.getElementById('createdPage').submit(); return false;">{{created}}</a>
 	</td>
 </tr>

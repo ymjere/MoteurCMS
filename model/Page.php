@@ -25,6 +25,15 @@ class Page
 		return $rps;
 	}
 	
+	public function getPage($id){
+		$req=$this->bdd->prepare("SELECT * FROM pages WHERE id=:id");
+		$req->execute(array(
+			"id" =>  $id,
+		));
+		$rp=$req->fetch();
+		return $rp;
+	}
+	
 	public function ModifPage($id,$pwd){
 		$req=$this->bdd->prepare("UPDATE users SET password = :pwd WHERE id=:id");
 		$req->execute(array(

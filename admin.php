@@ -20,15 +20,16 @@
 					$detailView=new View("view/userRow.html");
 					echo $view->render(array(
 						'navigation' => file_get_contents("view/nav.html"),
-						'users'=> $detailView->renderList($user->getUsersList())
+						'users'=> $detailView->renderList($user->getUsersList($_SESSION['user']['login']))
 					));
 					break;
 				case 'pagesManage':
 					$view=new View("view/pagesManage.html");
 					$detailView=new View("view/pageRow.html");
+					$pages = $detailView->renderList($page->getPagesList());
 					echo $view->render(array(
 						'navigation' => file_get_contents("view/nav.html"),
-						'pages'=> $detailView->renderList($page->getPagesList($_SESSION['user']['login']))
+						'pages'=> $pages
 					));
 					break;
 				default :
