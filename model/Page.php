@@ -33,6 +33,12 @@ class Page
 		$rp=$req->fetch();
 		return $rp;
 	}
+	public function setCreated($id){
+		$req=$this->bdd->prepare("UPDATE pages SET created = 1 WHERE id=:id");
+		$req->execute(array(
+			"id" =>  $id,
+		));
+	}
 	
 	public function ModifPage($id,$pwd){
 		$req=$this->bdd->prepare("UPDATE users SET password = :pwd WHERE id=:id");

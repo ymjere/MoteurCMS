@@ -15,6 +15,7 @@
 		}	
 		elseif($_POST['mode'] == 'generatePage' && isset($_POST['page'])){
 			generatePage($page, $_POST['page']);
+			$page->setCreated($_POST['page']);
 		}
 	}
 	
