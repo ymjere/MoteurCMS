@@ -27,7 +27,7 @@ class Page
 	public function setCreated($id){
         $req=$this->bdd->prepare("UPDATE pages SET created = 1 WHERE id=:id");
         $req->execute(array(
-            "id" =>  $id,
+            'id' =>  $id,
         ));
     }
 
@@ -35,7 +35,7 @@ class Page
 	public function getPage($id){
         $req=$this->bdd->prepare("SELECT * FROM pages WHERE id=:id");
         $req->execute(array(
-            "id" =>  $id,
+            'id' =>  $id,
         ));
         $rp=$req->fetch();
         return $rp;
