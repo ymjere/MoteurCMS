@@ -61,7 +61,7 @@ class Page
 		$req=$this->bdd->prepare("INSERT INTO pages (`id`, `title`, `imgLink`,`content`) VALUES (NULL,:title,:imgLink,:content)");
 		$req->execute(array(
 			'title' => $title,
-			'imgLink' => $imgLink['name'],
+			'imgLink' => $imgLink,
 			'content' => $content,
 		));
 	}

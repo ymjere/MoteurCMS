@@ -6,7 +6,7 @@
 	if(isset($_POST['mode'])){
 		if($_POST['mode'] == 'createPage' && isset($_POST['title']) && isset($_FILES['imgLink']) && isset($_POST['content']) ){
 			RecupFile($_FILES['imgLink']);
-			$page->CreatePage($_POST['title'],$_FILES['imgLink'],$_POST['content']);
+			$page->CreatePage($_POST['title'],"img/".$_FILES['imgLink']['name'],$_POST['content']);
 		}
 		elseif($_POST['mode'] == 'edit' && isset($_POST['newPassword']) && isset($_POST['id']) ){
 			$user->ModifUser($_POST['id'],$_POST['newPassword']);
@@ -22,9 +22,12 @@
 	
 
 	$view=new View("view/pagesManage.html");
-		echo $view->render(array(
-			'navigation' => file_get_contents("view/nav.html")
-		));
+					$detailView=new View("view/pageRow.html");
+					$pages = $detailView->renderList($page->getPagesList());
+					echo $view->render(array(
+						'navigation' => file_get_contents("view/nav.html"),
+						'pages'=> $pages
+					));
 		
 	function generatePage($page, $id){
 		$generatePage = $page->getPage($id);
@@ -39,7 +42,7 @@
 	function RecupFile($file){
 		$dossier = 'img/';
 		$fichier = basename($file['name']);
-		$taille_maxi = 100000;
+		$taille_maxi = 1000000;
 		$taille = filesize($file['tmp_name']);
 		$extensions = array('.png', '.gif', '.jpg', '.jpeg');
 		$extension = strrchr($file['name'], '.'); 
@@ -64,7 +67,7 @@
 			 }
 		}
 		else{
-			 echo "";
+			 echo $erreur;
 		}
 	}
 

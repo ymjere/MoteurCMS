@@ -31,7 +31,7 @@
 				return $data;
 			};
 
-			return preg_replace_callback("/\{\{((?:[a-z]+)(?:\.(?:[a-z]+))*)\}\}/",$callback,file_get_contents($this->file));
+			return preg_replace_callback("/\{\{((?:[a-zA-Z]+)(?:\.(?:[a-zA-Z]+))*)\}\}/",$callback,file_get_contents($this->file));
 		}
 		
 		public function renderList ( $list ) {			

@@ -70,25 +70,69 @@
 									<div class="form-group">
 									<br>	
 									<div class="col-md-5">
-										<form role="form" enctype="multipart/form-data" data-toggle="validator" action="PagesManageUtils.php" method="POST">
+										
 											<div class="form-group">
-												<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
+												<label>Select Template</label>
+												<select id="selectTpl" class="form-control">
+													<option id="1">Article</option>
+													<option id="2">List</option>
+													<option id="2">Link</option>
+												</select>
 											</div>
-											<div class="form-group">
-												<label>File input</label>
-												<input type="file" name="imgLink">													
+											
+											<div id="form1">
+												<form role="form" enctype="multipart/form-data" data-toggle="validator" action="PagesManageUtils.php" method="POST">
+													<div class="form-group">
+														<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
+													</div>
+													<div class="form-group">
+														<label>File input</label>
+														<input type="file" name="imgLink">													
+													</div>
+													<div class="form-group">
+														<textarea name="content" class="form-control" rows="3" placeholder="Content"></textarea>
+													</div>	
+													<input type="hidden" value="createPage" name="mode">
+													<div class="form-group" style="margin-top: 15px;">
+														<div class="col-xs-1">
+															<button type="submit" class="btn btn-default">Validate</button>
+														</div>
+													</div>
+												</form>
 											</div>
-											<div class="form-group">
-												<textarea name="content" class="form-control" rows="3" placeholder="Content"></textarea>
-											</div>	
-											<input type="hidden" value="createPage" name="mode">
-											<div class="form-group" style="margin-top: 15px;">
-												<div class="col-xs-1">
-													<button type="submit" class="btn btn-default">Validate</button>
-												</div>
+											
+											<div id="form2">
+												<form role="form" enctype="multipart/form-data" data-toggle="validator" action="PagesManageUtils.php" method="POST">
+													<div class="form-group">
+														<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
+													</div>
+													<input type="hidden" value="createPage" name="mode">
+													<div class="form-group" style="margin-top: 15px;">
+														<div class="col-xs-1">
+															<button type="submit" class="btn btn-default">Validate</button>
+														</div>
+													</div>
+												</form>
 											</div>
-										</form>
-									</div>
+											
+											<div id="form3">
+												<form role="form" enctype="multipart/form-data" data-toggle="validator" action="PagesManageUtils.php" method="POST">
+													<div class="form-group">
+														<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
+													</div>
+													<div class="form-group">
+														<input required type="text" pattern="^([_&:/A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Link (http://www.exemple.com)" />
+													</div>
+													<input type="hidden" value="createPage" name="mode">
+													<div class="form-group" style="margin-top: 15px;">
+														<div class="col-xs-1">
+															<button type="submit" class="btn btn-default">Validate</button>
+														</div>
+													</div>
+												</form>
+											</div>
+											
+										</div>
 									</div>
 								</div>
 							</div>		
@@ -96,6 +140,11 @@
             </div>
         </div>
 	</div>
-
+	<script>
+	$('#selectTpl').change(function() {
+	   $('#form1, #form2, #form3').hide();
+	   $('#form' + $(this).find('option:selected').attr('id')).show();
+	});
+	</script>
 </body>
 </html>
