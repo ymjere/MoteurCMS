@@ -4,9 +4,17 @@
 	include('init.php');
 
 	if(isset($_POST['mode'])){
-		if($_POST['mode'] == 'createPage' && isset($_POST['title']) && isset($_FILES['imgLink']) && isset($_POST['content']) ){
-			RecupFile($_FILES['imgLink']);
-			$page->CreatePage($_POST['title'],"img/".$_FILES['imgLink']['name'],$_POST['content']);
+		if($_POST['mode'] == 'createPage' && isset($_POST['title'])){
+			$data = array();
+			foreach($_POST as $key => $donnée) {
+				if(!($key == 'title' || $key ==  'template' || $key ==  'mode')){
+					$data[$key] = $donnée;
+				}
+			}
+			foreach($_FILES as $key => $donnée) {
+				$data['img'] = $donnée['name'];
+			}
+			$page->CreatePage($_POST['title'],json_encode($data), $_POST['template']);
 		}
 		elseif($_POST['mode'] == 'edit' && isset($_POST['newPassword']) && isset($_POST['id']) ){
 			$user->ModifUser($_POST['id'],$_POST['newPassword']);
