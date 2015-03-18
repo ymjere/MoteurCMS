@@ -58,7 +58,6 @@
 												<td>ID</td>
 												<td>Title</td>
 												<td>Content</td>
-												<td>Image</td>
 												<td>Created</td>
 											</tr>
 												{{pages}}
@@ -83,7 +82,7 @@
 											<div id="form1">
 												<form role="form" enctype="multipart/form-data" data-toggle="validator" action="PagesManageUtils.php" method="POST">
 													<div class="form-group">
-														<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
+														<input required type="text" pattern="^([_A-z0-9]){3,10000}$" class="form-control" name="title" placeholder="Title" />
 													</div>
 													<div class="form-group">
 														<label>File input</label>

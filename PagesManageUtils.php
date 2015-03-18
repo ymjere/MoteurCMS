@@ -2,6 +2,7 @@
 	session_start();
 	
 	include('init.php');
+	
 	if(isset($_POST['mode'])){
 		if($_POST['mode'] == 'createPage' && isset($_POST['title'])){
 			$data = array();
@@ -10,45 +11,82 @@
 					$data[$key] = $donnée;
 				}
 			}
+			if(isset($_FILES['imgLink'])) RecupFile($_FILES['imgLink']);
 			foreach($_FILES as $key => $donnée) {
-				$data['img'] = 'img/' . $donnée['name'];
+				$data['img'] = './img/' . $donnée['name'];
 			}
 			$page->CreatePage($_POST['title'],json_encode($data), $_POST['template']);
+			generateList($page);
 		}
 		elseif($_POST['mode'] == 'edit' && isset($_POST['newPassword']) && isset($_POST['id']) ){
 			$user->ModifUser($_POST['id'],$_POST['newPassword']);
+			generateList($page);
 		}
 		elseif($_POST['mode'] == 'delete' && isset($_POST['id']) ){
 			$user->SupprUser($_POST['id']);
+			generateList($page);
 		}	
-		elseif($_POST['mode'] == 'generatePage' && isset($_POST['page'])){
-			generatePage($page, $_POST['page']);
-			$page->setCreated($_POST['page']);
+		elseif($_POST['mode'] == 'generatePage' && isset($_POST['pageid'])){
+			generatePage($page, $_POST['pageid']);
 		}
+	}else generateList($page);
+		
+	function generateList($page){
+		$view=new View("view/pagesManage.html");
+		$detailView=new View("view/pageRow.html");
+		$pages = $detailView->renderList($page->getPagesList());
+		echo $view->render(array(
+			'navigation' => file_get_contents("view/nav.html"),
+			'pages'=> $pages
+		));
 	}
 	
-	$view=new View("view/pagesManage.html");
-	$detailView=new View("view/pageRow.html");
-	$pages = $detailView->renderList($page->getPagesList());
-	echo $view->render(array(
-		'navigation' => file_get_contents("view/nav.html"),
-		'pages'=> $pages
-	));
-		
 	function generatePage($page, $id){
+		$results = array();
 		$generatePage = $page->getPage($id);
-		$file = $generatePage['title'].".php";
-		
-		$content = "test";
-		
-		file_put_contents($file, $content);
+		$type =  $generatePage['typeTemplate'];
+		$title = $generatePage['title'];
+		//recuperation du format json et conversion en tableau
+		$result = json_decode($generatePage['content']);
+		foreach($result as $key => $value){
+			$results[$key] = $value;
+		}
+		switch ($type) {
+			case 1:
+				$view=new View("template/article.html");
+				echo $view->render(array(
+						'title' => $title,
+						'content' => $results['content'],
+						'imgLink' => $results['img'],
+						'header' => file_get_contents("includes/header.html"),
+						'footer' => file_get_contents("includes/footer.html"),
+					));
+				break;
+			case 2:
+				$view=new View("template/list.html");
+				echo $view->render(array(
+						'title' => $title,
+						'header' => file_get_contents("includes/header.html"),
+						'footer' => file_get_contents("includes/footer.html"),
+					));
+				break;
+			case 3:
+				$view=new View("template/link.html");
+				echo $view->render(array(
+						'title' => $title,
+						'link' => $results['link'],
+						'header' => file_get_contents("includes/header.html"),
+						'footer' => file_get_contents("includes/footer.html"),
+					));
+				break;
+		}
 	}
 	
 	//Récupération de l'image uploadé
 	function RecupFile($file){
 		$dossier = 'img/';
 		$fichier = basename($file['name']);
-		$taille_maxi = 1000000;
+		$taille_maxi = 1000000; //1Mo
 		$taille = filesize($file['tmp_name']);
 		$extensions = array('.png', '.gif', '.jpg', '.jpeg');
 		$extension = strrchr($file['name'], '.'); 

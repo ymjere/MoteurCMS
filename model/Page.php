@@ -24,13 +24,6 @@ class Page
 		return $rps;
 	}
 	
-	public function setCreated($id){
-        $req=$this->bdd->prepare("UPDATE pages SET created = 1 WHERE id=:id");
-        $req->execute(array(
-            'id' =>  $id,
-        ));
-    }
-
 	
 	public function getPage($id){
         $req=$this->bdd->prepare("SELECT * FROM pages WHERE id=:id");
