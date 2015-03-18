@@ -1,0 +1,29 @@
+html,body{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.content{
+	width: 1000px;
+	margin: 0 auto;
+	background-color: whitesmoke;
+}
+
+.content h1{
+	text-align: center;
+}
+
+.content img{
+	width: 50%;
+	float: left;
+	margin: 10px;
+}
+
+.content p{
+	float: left;
+}
+
+footer{
+	clear: both;
+}
