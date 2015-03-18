@@ -123,10 +123,10 @@
 														<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
 													</div>
 													<div class="form-group">
-														<input required type="text" pattern="^([_&:/A-z0-9]){3,30}$" class="form-control" name="link" placeholder="Link (http://www.exemple.com)" />
+														<input required type="text" pattern="((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)" class="form-control" name="link" placeholder="Link (http://www.exemple.com)" />
 													</div>
-													<input type="hidden" value="createPage" name="template">
-													<input type="hidden" value="3" name="tpl">
+													<input type="hidden" value="createPage" name="mode">
+													<input type="hidden" value="3" name="template">
 													<div class="form-group" style="margin-top: 15px;">
 														<div class="col-xs-1">
 															<button type="submit" class="btn btn-default">Validate</button>

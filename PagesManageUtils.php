@@ -2,7 +2,6 @@
 	session_start();
 	
 	include('init.php');
-
 	if(isset($_POST['mode'])){
 		if($_POST['mode'] == 'createPage' && isset($_POST['title'])){
 			$data = array();
@@ -12,7 +11,7 @@
 				}
 			}
 			foreach($_FILES as $key => $donnée) {
-				$data['img'] = $donnée['name'];
+				$data['img'] = 'img/' . $donnée['name'];
 			}
 			$page->CreatePage($_POST['title'],json_encode($data), $_POST['template']);
 		}
@@ -28,14 +27,13 @@
 		}
 	}
 	
-
 	$view=new View("view/pagesManage.html");
-					$detailView=new View("view/pageRow.html");
-					$pages = $detailView->renderList($page->getPagesList());
-					echo $view->render(array(
-						'navigation' => file_get_contents("view/nav.html"),
-						'pages'=> $pages
-					));
+	$detailView=new View("view/pageRow.html");
+	$pages = $detailView->renderList($page->getPagesList());
+	echo $view->render(array(
+		'navigation' => file_get_contents("view/nav.html"),
+		'pages'=> $pages
+	));
 		
 	function generatePage($page, $id){
 		$generatePage = $page->getPage($id);
