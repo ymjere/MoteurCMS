@@ -27,9 +27,12 @@
 					$view=new View("view/pagesManage.html");
 					$detailView=new View("view/pageRow.html");
 					$pages = $detailView->renderList($page->getPagesList());
+					$detailView=new View("view/pageSelect.html");
+					$selectPages = $detailView->renderList($page->getPagesList());
 					echo $view->render(array(
 						'navigation' => file_get_contents("view/nav.html"),
-						'pages'=> $pages
+						'pages'=> $pages,
+						'selectPages'=> $selectPages
 					));
 					break;
 				default :
@@ -46,7 +49,8 @@
 		}
 	}
 	else{
-		$view=new View("view/login.html");
+		$page = $page->getDefaultPage();
+		$view=new View("website/".$page['title'].".html");
 		echo $view->render("");
 	}
 ?>

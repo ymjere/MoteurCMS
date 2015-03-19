@@ -45,12 +45,13 @@
 				<hr>
 				<div class="col-md-12">
 					<ul class="nav nav-tabs" data-tabs="tabs">
-						<li class="active"><a href="#header" data-toggle="tab">Pages list <i class="fa"></i></a></li>
-						<li><a href="#footer" data-toggle="tab">Add page <i class="fa"></i></a></li>
+						<li class="active"><a href="#pagesList" data-toggle="tab">Pages list <i class="fa"></i></a></li>
+						<li><a href="#selectDefaultPage" data-toggle="tab">Default page<i class="fa"></i></a></li>
+						<li><a href="#addPage" data-toggle="tab">Add page <i class="fa"></i></a></li>
 					</ul>	
 
 							<div class="tab-content">
-								<div class="tab-pane active" id="header">
+								<div class="tab-pane active" id="pagesList">
 									<div class="form-group">
 									<br>
 										<table class="table table-hover">
@@ -58,14 +59,34 @@
 												<td>ID</td>
 												<td>Title</td>
 												<td>Content</td>
-												<td>Created</td>
+												<td>Create</td>
 											</tr>
 												{{pages}}
 										</table>
 									</div>
 								</div>
 								
-								<div class="tab-pane" id="footer">
+								<div class="tab-pane" id="selectDefaultPage">
+									<div class="form-group">
+									<br>
+									<form role="form" data-toggle="validator" action="PagesManageUtils.php" method="POST">
+										<div class="form-group">
+												<label>Select the default page</label>
+												<select id="defaultPage" class="form-control">
+													{{selectPages}}
+												</select>
+										</div>
+										<input type="hidden" value="selectDefaultPage" name="mode">
+										<div class="form-group" style="margin-top: 15px;">
+														<div class="col-xs-1">
+															<button type="submit" class="btn btn-default">Validate</button>
+														</div>
+													</div>
+									</form>
+									</div>
+								</div>
+								
+								<div class="tab-pane" id="addPage">
 									<div class="form-group">
 									<br>	
 									<div class="col-md-5">

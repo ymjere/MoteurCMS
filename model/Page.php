@@ -43,6 +43,22 @@ class Page
 		));
 	}
 	
+	public function setDefaultPage($id){
+		$req=$this->bdd->prepare("UPDATE pages SET defaultPage = 0");
+		$req->execute();
+		$req=$this->bdd->prepare("UPDATE pages SET defaultPage = 1 WHERE id=:id");
+		$req->execute(array(
+			'id' =>  $id,
+		));
+	}
+	
+	public function getDefaultPage(){
+        $req=$this->bdd->prepare("SELECT * FROM pages WHERE defaultPage = 1");
+        $req->execute();
+        $rp=$req->fetch();
+        return $rp;
+    }
+	
 	public function SupprUser($id){
 		$req=$this->bdd->prepare("DELETE FROM users WHERE id=:id");
 		$req->execute(array(
