@@ -7,7 +7,7 @@
 		if($_POST['mode'] == 'createPage' && isset($_POST['title'])){
 			$data = array();
 			foreach($_POST as $key => $donnée) {
-				if(!($key == 'title' || $key ==  'template' || $key ==  'mode')){
+				if(!($key == 'title' || $key ==  'template' || $key ==  'mode' || $key ==  'url')){
 					$data[$key] = $donnée;
 				}
 			}
@@ -15,7 +15,7 @@
 			foreach($_FILES as $key => $donnée) {
 				$data['img'] = './img/' . $donnée['name'];
 			}
-			$page->CreatePage($_POST['title'],json_encode($data), $_POST['template']);
+			$page->CreatePage($_POST['title'],json_encode($data), $_POST['template'], $_POST['url']);
 			generateList($page);
 		}
 		elseif($_POST['mode'] == 'edit' && isset($_POST['newPassword']) && isset($_POST['id']) ){
@@ -26,9 +26,6 @@
 			$user->SupprUser($_POST['id']);
 			generateList($page);
 		}	
-		elseif($_POST['mode'] == 'generatePage' && isset($_POST['pageid'])){
-			generatePage($page, $_POST['pageid']);
-		}
 		elseif($_POST['mode'] == 'selectDefaultPage' && isset($_POST['defaultPage'])){
 			$page->setDefaultPage($_POST['defaultPage']);
 		}
@@ -44,51 +41,7 @@
 			'pages'=> $pages
 		));
 	}
-	
-	function generatePage($page, $id){
-		$results = array();
-		$generatePage = $page->getPage($id);
-		$type =  $generatePage['typeTemplate'];
-		$title = $generatePage['title'];
-		//recuperation du format json et conversion en tableau
-		$result = json_decode($generatePage['content']);
-		foreach($result as $key => $value){
-			$results[$key] = $value;
-		}
-		switch ($type) {
-			case 1:
-				$view=new View("template/article.html");
-				$contentData = $view->render(array(
-						'title' => $title,
-						'content' => $results['content'],
-						'imgLink' => $results['img'],
-						'header' => file_get_contents("includes/header.html"),
-						'footer' => file_get_contents("includes/footer.html"),
-					));
-				file_put_contents('website/' . $title . '.html', $contentData);
-				break;
-			case 2:
-				$view=new View("template/list.html");
-				$contentData = $view->render(array(
-						'title' => $title,
-						'header' => file_get_contents("includes/header.html"),
-						'footer' => file_get_contents("includes/footer.html"),
-					));
-				file_put_contents('website/' . $title . '.html', $contentData);
-				break;
-			case 3:
-				$view=new View("template/link.html");
-				$contentData = $view->render(array(
-						'title' => $title,
-						'link' => $results['link'],
-						'header' => file_get_contents("includes/header.html"),
-						'footer' => file_get_contents("includes/footer.html"),
-					));
-				file_put_contents('website/' . $title . '.html', $contentData);
-				break;
-		}
-	}
-	
+		
 	//Récupération de l'image uploadé
 	function RecupFile($file){
 		$dossier = 'img/';

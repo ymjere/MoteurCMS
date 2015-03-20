@@ -66,12 +66,13 @@ class Page
 		));
 	}
 	
-	public function CreatePage($title,$content,$typeTemplate){
-		$req=$this->bdd->prepare("INSERT INTO pages (`id`, `title`, `content`,`typeTemplate`) VALUES (NULL,:title,:content,:typeTemplate)");
+	public function CreatePage($title,$content,$typeTemplate,$url){
+		$req=$this->bdd->prepare("INSERT INTO pages (`id`, `title`, `content`,`typeTemplate`,`url`) VALUES (NULL,:title,:content,:typeTemplate,:url)");
 		$req->execute(array(
 			'title' => $title,
 			'content' => $content,
 			'typeTemplate' => $typeTemplate,
+			'url' => $url
 		));
 	}
 }

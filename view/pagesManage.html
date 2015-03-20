@@ -59,7 +59,7 @@
 												<td>ID</td>
 												<td>Title</td>
 												<td>Content</td>
-												<td>Create</td>
+												<td>Url</td>
 											</tr>
 												{{pages}}
 										</table>
@@ -103,6 +103,9 @@
 											<div id="form1">
 												<form role="form" enctype="multipart/form-data" data-toggle="validator" action="PagesManageUtils.php" method="POST">
 													<div class="form-group">
+														<input type="text" pattern="^([_A-z0-9]){3,50}$" class="form-control" name="url" placeholder="URL" />
+													</div>
+													<div class="form-group">
 														<input required type="text" pattern="^([_A-z0-9]){3,10000}$" class="form-control" name="title" placeholder="Title" />
 													</div>
 													<div class="form-group">
@@ -125,6 +128,9 @@
 											<div id="form2">
 												<form role="form" data-toggle="validator" action="PagesManageUtils.php" method="POST">
 													<div class="form-group">
+														<input type="text" pattern="^([_A-z0-9]){3,50}$" class="form-control" name="url" placeholder="URL" />
+													</div>
+													<div class="form-group">
 														<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
 													</div>
 													<input type="hidden" value="createPage" name="mode">
@@ -139,6 +145,9 @@
 											
 											<div id="form3">
 												<form role="form" data-toggle="validator" action="PagesManageUtils.php" method="POST">
+													<div class="form-group">
+														<input type="text" pattern="^([_A-z0-9]){3,50}$" class="form-control" name="url" placeholder="URL" />
+													</div>
 													<div class="form-group">
 														<input required type="text" pattern="^([_A-z0-9]){3,30}$" class="form-control" name="title" placeholder="Title" />
 													</div>

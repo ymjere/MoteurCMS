@@ -9,10 +9,6 @@
 		{{content}}
 	</td>
 	<td>
-		<form id="createdPage{{id}}" action="PagesManageUtils.php" method="POST">		
-			<input type="hidden" name="mode" value="generatePage"/>
-			<input type="hidden" name="pageid" value="{{id}}"/>
-		</form>
-		<a href="#" onclick="document.getElementById('createdPage{{id}}').submit(); return false;">create</a>
+		{{url}}
 	</td>
 </tr>
