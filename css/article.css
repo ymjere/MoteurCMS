@@ -10,6 +10,11 @@ html,body{
 	background-color: whitesmoke;
 }
 
+.content header, .content footer{
+	text-align: center;
+	background-color: lightgrey;
+}
+
 .content h1{
 	text-align: center;
 }

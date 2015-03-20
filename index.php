@@ -39,10 +39,17 @@
 					switch ($type) {
 						case 1:
 							$view=new View("template/article.html");
+							if($results['img'] != "./img/"){
+								$img = '<img src='.$results['img'].' alt="" />';
+							}else{
+								$img="";
+							}			
+							$navView = new View("template/nav.html");
 							echo $view->render(array(
 									'title' => $title,
+									'nav' => $navView->renderList($pageList),
 									'content' => $results['content'],
-									'imgLink' => $results['img'],
+									'imgLink' => $img,
 									'header' => file_get_contents("includes/header.html"),
 									'footer' => file_get_contents("includes/footer.html"),
 								));
